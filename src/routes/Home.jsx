@@ -1,14 +1,14 @@
-import React from 'react';
+
 import { useEffect, useState } from 'react';
 import './Home.css';
-import axios from 'axios';
+import blogFetch from '../axios/config';
 import { Link } from 'react-router-dom';
 const Home = () => {
 
     const [posts, setPosts] = useState([]);//aqui eu criei um estado chamado posts que é um array vazio e a função setPosts que será responsável por atualizar o estado posts.
     const getPosts = async () => {//aqui eu criei uma função chamada getPosts que é assíncrona.
         try {
-            const response = await axios.get("https://jsonplaceholder.typicode.com/posts");//aqui eu fiz uma requisição GET para a API JSONPlaceholder que retorna uma lista de posts.
+            const response = await blogFetch.get("/posts");//aqui eu fiz uma requisição GET para a API JSONPlaceholder que retorna uma lista de posts.
             
             const data = response.data;//aqui eu armazenei a lista de posts na variável data.
 
