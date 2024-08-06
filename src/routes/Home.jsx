@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import './Home.css';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 const Home = () => {
 
     const [posts, setPosts] = useState([]);//aqui eu criei um estado chamado posts que é um array vazio e a função setPosts que será responsável por atualizar o estado posts.
@@ -25,9 +26,17 @@ const Home = () => {
 
 
     return (
-        <div>
+        <div className='home'>
             <h1>Ultimos Posts</h1>
-            {posts.length === 0 ? (<p>Carregando...</p>) : (<p>Carregou</p>)}
+            {posts.length === 0 ? (<p>Carregando...</p>) : (
+                posts.map((post)=>( /*aqui eu usei o método map para percorrer a lista de posts e renderizar cada post na tela.*/
+                    <div key={post.id} className="post">
+                        <h2>{post.title}</h2>
+                        <p>{post.body}</p>
+                        <Link to={`/post/${post.id}`} className='btn'>Ver mais</Link>
+                    </div>
+                ))
+            )}
         </div>
     )
 }
